@@ -34,4 +34,32 @@ public class Car {
     public void printPosition (){
         System.out.println("You have traveled "+position+" kilometers from the starting point. "+fuel+" liters of fuel left");
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Car car = (Car) o;
+
+        if (Double.compare(car.position, position) != 0) return false;
+        if (Double.compare(car.fuel, fuel) != 0) return false;
+        if (Double.compare(car.gasTankVolume, gasTankVolume) != 0) return false;
+        return Double.compare(car.fuelconsumption, fuelconsumption) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        long temp;
+        temp = Double.doubleToLongBits(position);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(fuel);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(gasTankVolume);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(fuelconsumption);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }
